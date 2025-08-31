@@ -1,0 +1,18 @@
+﻿{
+  "name": "inventory",
+  "version": "0.1.0",
+  "displayName": "inventory",
+  "description": "inventory",
+  "unity": "2019.3",
+  "dependencies": {
+    "unity-utility": "1.0.0"
+  },
+  "keywords": [
+    "inventory"
+  ],
+  "author": {
+    "name": "Claude Fehlen",
+    "email": "fl-claude@hotmail.com",
+    "url": "https://claudefehlen.com"
+  }
+}
