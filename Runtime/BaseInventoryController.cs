@@ -1,7 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
 
 namespace Inventory
 {
@@ -15,22 +12,27 @@ namespace Inventory
     {
         
     }
-    public class BaseItemController<TState> : IITem where TState : BaseItemState
+    public class BaseItemController<TState, TConfig> : IITem where TState : BaseItemState where TConfig : BaseItemConfig
     {
-        public string Id => _config.Id;
-        public int Amount => _state.Amount;
-        private BaseItemConfig _config;
-        private TState _state;
+        public string Id => Config.Id;
+        public int Amount => State.Amount;
+        protected TConfig Config;
+        protected TState State;
 
-        public void Init(BaseItemConfig config, TState state)
+        public void Init(TConfig config, TState state)
         {
-            _config = config;
-            _state = state;
+            Config = config;
+            State = state;
         }
 
-        public void Add(int amount)
+        public virtual void Add(int amount)
         {
-            _state.Amount += amount;
+            State.Amount += amount;
+        }
+        
+        public virtual void Remove(int amount)
+        {
+            State.Amount -= amount;
         }
     }
 
@@ -39,7 +41,11 @@ namespace Inventory
         public string Id { get; } 
         void Init(string id);
     }
-    
+
+    public interface IInventoryOwner
+    {
+        IInventory GetInventory();
+    }
     public class BaseInventoryController<TITem> : IInventory where TITem : IITem
     {
         public string Id { get; private set; }
@@ -49,7 +55,5 @@ namespace Inventory
         {
             Id = id;
         }
-        
-       
     }
 }
