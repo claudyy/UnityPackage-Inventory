@@ -55,5 +55,10 @@ namespace Inventory
         {
             Id = id;
         }
+        
+        public List<TITem> GetAll()
+        {
+            return new List<TITem>(Items);
+        }
     }
 }
